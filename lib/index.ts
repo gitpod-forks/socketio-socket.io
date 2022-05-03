@@ -142,13 +142,26 @@ export class Server<
    * @public
    */
   constructor(opts?: Partial<ServerOptions>);
-  constructor(srv?: http.Server | https.Server | number, opts?: Partial<ServerOptions>);
   constructor(
-    srv: undefined | Partial<ServerOptions> | http.Server | https.Server | number,
+    srv?: http.Server | https.Server | number,
     opts?: Partial<ServerOptions>
   );
   constructor(
-    srv: undefined | Partial<ServerOptions> | http.Server | https.Server | number,
+    srv:
+      | undefined
+      | Partial<ServerOptions>
+      | http.Server
+      | https.Server
+      | number,
+    opts?: Partial<ServerOptions>
+  );
+  constructor(
+    srv:
+      | undefined
+      | Partial<ServerOptions>
+      | http.Server
+      | https.Server
+      | number,
     opts: Partial<ServerOptions> = {}
   ) {
     super();
@@ -168,7 +181,8 @@ export class Server<
     this.adapter(opts.adapter || Adapter);
     this.sockets = this.of("/");
     this.opts = opts;
-    if (srv || typeof srv == "number") this.attach(srv as http.Server | https.Server | number);
+    if (srv || typeof srv == "number")
+      this.attach(srv as http.Server | https.Server | number);
   }
 
   /**
